@@ -1,0 +1,438 @@
+{
+  "started_at": "2026-07-11T09:15:06.681582",
+  "tables": [
+    {
+      "table": "tab_programas",
+      "updated": 1252951,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 163.89
+    },
+    {
+      "table": "tab_proponentes",
+      "updated": 69011,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 3.54
+    },
+    {
+      "table": "tab_consorcios",
+      "updated": 202,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 1.55
+    },
+    {
+      "table": "rlc_dados_disponibilizacao_programas",
+      "updated": 1252951,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 110.6
+    },
+    {
+      "table": "rlc_dados_uf_modalidade_programas",
+      "updated": 1252351,
+      "inserted": 600,
+      "skipped": false,
+      "duration_sec": 27.29
+    },
+    {
+      "table": "tab_pergunta_selecao_pac",
+      "updated": 2414,
+      "inserted": 6,
+      "skipped": false,
+      "duration_sec": 0.13
+    },
+    {
+      "table": "tab_apoiadores_emendas_programas",
+      "updated": 0,
+      "inserted": 291438,
+      "skipped": false,
+      "duration_sec": 5.1
+    },
+    {
+      "table": "rlc_programa_proponente",
+      "updated": 523819,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 12.59
+    },
+    {
+      "table": "tab_propostas",
+      "updated": 1151153,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 207.52
+    },
+    {
+      "table": "tab_propostas_canceladas",
+      "updated": 45182,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 5.13
+    },
+    {
+      "table": "tab_propostas_selecao_pac",
+      "updated": 90495,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 13.85
+    },
+    {
+      "table": "rlc_programa_proposta",
+      "updated": 1152504,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 33.83
+    },
+    {
+      "table": "rlc_consorcios_participantes_propostas",
+      "updated": 150667,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 4.73
+    },
+    {
+      "table": "rlc_proposta_formalizacao_pac",
+      "updated": 8887,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 0.21
+    },
+    {
+      "table": "tab_resposta_selecao_pac",
+      "updated": 0,
+      "inserted": 1885240,
+      "skipped": false,
+      "duration_sec": 15.01
+    },
+    {
+      "table": "rlc_emendas_propostas_proponentes",
+      "updated": 0,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 2.41
+    },
+    {
+      "table": "tab_emendas",
+      "updated": 289944,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 51.91
+    },
+    {
+      "table": "tab_beneficiarios_emendas",
+      "updated": 182739,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 8.97
+    },
+    {
+      "table": "rlc_historico_situacao",
+      "updated": 5621281,
+      "inserted": 3282166,
+      "skipped": false,
+      "duration_sec": 519.91
+    },
+    {
+      "table": "tab_justificativas_proposta",
+      "updated": 0,
+      "inserted": 1157448,
+      "skipped": false,
+      "duration_sec": 238.09
+    },
+    {
+      "table": "tab_coordenadas_obras",
+      "updated": 0,
+      "inserted": 121401,
+      "skipped": false,
+      "duration_sec": 2.19
+    },
+    {
+      "table": "tab_cronograma_desembolso",
+      "updated": 0,
+      "inserted": 2726766,
+      "skipped": false,
+      "duration_sec": 39.38
+    },
+    {
+      "table": "tab_plano_aplicacao_detalhado",
+      "updated": 0,
+      "inserted": 4829515,
+      "skipped": false,
+      "duration_sec": 230.28
+    },
+    {
+      "table": "tab_resumo_fisico_financeiro",
+      "updated": 0,
+      "inserted": 29718,
+      "skipped": false,
+      "duration_sec": 1.17
+    },
+    {
+      "table": "tab_solicitacao_ajuste_pt",
+      "updated": 0,
+      "inserted": 177297,
+      "skipped": false,
+      "duration_sec": 1.72
+    },
+    {
+      "table": "tab_historico_projeto_basico",
+      "updated": 0,
+      "inserted": 1051101,
+      "skipped": false,
+      "duration_sec": 18.2
+    },
+    {
+      "table": "tab_projeto_basico_acffo_modulo_empresas",
+      "updated": 0,
+      "inserted": 63170,
+      "skipped": false,
+      "duration_sec": 1.85
+    },
+    {
+      "table": "tab_projeto_basico_lae_modulo_empresas",
+      "updated": 0,
+      "inserted": 216645,
+      "skipped": false,
+      "duration_sec": 3.63
+    },
+    {
+      "table": "tab_projeto_basico_metas_modulo_empresas",
+      "updated": 0,
+      "inserted": 270271,
+      "skipped": false,
+      "duration_sec": 4.9
+    },
+    {
+      "table": "tab_projeto_basico_proposta_modulo_empresas",
+      "updated": 0,
+      "inserted": 100335,
+      "skipped": false,
+      "duration_sec": 0.83
+    },
+    {
+      "table": "tab_projeto_basico_submetas_modulo_empresas",
+      "updated": 0,
+      "inserted": 413794,
+      "skipped": false,
+      "duration_sec": 11.25
+    },
+    {
+      "table": "tab_acomp_obras_contratos_medicoes_modulo_empresas",
+      "updated": 0,
+      "inserted": 24905,
+      "skipped": false,
+      "duration_sec": 0.62
+    },
+    {
+      "table": "tab_acomp_obras_valores_itens_medicao_modulo_empresas",
+      "updated": 0,
+      "inserted": 23869,
+      "skipped": false,
+      "duration_sec": 0.46
+    },
+    {
+      "table": "tab_vrpl_proposta_licitacao_modulo_empresas",
+      "updated": 0,
+      "inserted": 40043,
+      "skipped": false,
+      "duration_sec": 0.81
+    },
+    {
+      "table": "tab_vrpl_metas_submetas_modulo_empresas",
+      "updated": 0,
+      "inserted": 155900,
+      "skipped": false,
+      "duration_sec": 5.87
+    },
+    {
+      "table": "tab_vrpl_lote_fornecedor_licitacao_modulo_empresas",
+      "updated": 0,
+      "inserted": 101474,
+      "skipped": false,
+      "duration_sec": 2.1
+    },
+    {
+      "table": "tab_inst_cont_proposta_aio_modulo_empresas",
+      "updated": 0,
+      "inserted": 29832,
+      "skipped": false,
+      "duration_sec": 0.41
+    },
+    {
+      "table": "tab_inst_cont_contratos_lotes_empresas_modulo_empresas",
+      "updated": 0,
+      "inserted": 34340,
+      "skipped": false,
+      "duration_sec": 0.78
+    },
+    {
+      "table": "tab_inst_cont_metas_submetas_po_modulo_empresas",
+      "updated": 0,
+      "inserted": 43456,
+      "skipped": false,
+      "duration_sec": 1.37
+    },
+    {
+      "table": "tab_meta_crono_fisico",
+      "updated": 1549941,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 135.47
+    },
+    {
+      "table": "tab_etapas_crono_fisico",
+      "updated": 3261957,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 280.21
+    },
+    {
+      "table": "tab_licitacao",
+      "updated": 941690,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 30.12
+    },
+    {
+      "table": "tab_contratos_cipi",
+      "updated": 0,
+      "inserted": 30650,
+      "skipped": false,
+      "duration_sec": 2.63
+    },
+    {
+      "table": "tab_itens_licitacao",
+      "updated": 0,
+      "inserted": 3029968,
+      "skipped": false,
+      "duration_sec": 96.27
+    },
+    {
+      "table": "tab_dl",
+      "updated": 7433810,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 316.52
+    },
+    {
+      "table": "tab_fornecedores_licitacoes",
+      "updated": 0,
+      "inserted": 0,
+      "skipped": true,
+      "duration_sec": 0.66
+    },
+    {
+      "table": "tab_empenhos",
+      "updated": 432041,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 29.44
+    },
+    {
+      "table": "tab_empenhos_cipi",
+      "updated": 46332,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 2.63
+    },
+    {
+      "table": "tab_execucao_fisica_cipi",
+      "updated": 21860,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 0.96
+    },
+    {
+      "table": "tab_desembolsos",
+      "updated": 375334,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 16.24
+    },
+    {
+      "table": "rlc_empenhos_desembolsos",
+      "updated": 244365,
+      "inserted": 135544,
+      "skipped": false,
+      "duration_sec": 8.86
+    },
+    {
+      "table": "tab_pagamentos",
+      "updated": 7307324,
+      "inserted": 0,
+      "skipped": false,
+      "duration_sec": 794.73
+    },
+    {
+      "table": "tab_pagamento_tributo",
+      "updated": 0,
+      "inserted": 447061,
+      "skipped": false,
+      "duration_sec": 4.16
+    },
+    {
+      "table": "tab_desbloqueio_cr",
+      "updated": 0,
+      "inserted": 516295,
+      "skipped": false,
+      "duration_sec": 13.11
+    },
+    {
+      "table": "tab_ingresso_contrapartida",
+      "updated": 0,
+      "inserted": 341258,
+      "skipped": false,
+      "duration_sec": 5.52
+    },
+    {
+      "table": "tab_prorroga_oficios",
+      "updated": 0,
+      "inserted": 155349,
+      "skipped": false,
+      "duration_sec": 3.54
+    },
+    {
+      "table": "tab_termo_aditivo",
+      "updated": 0,
+      "inserted": 453014,
+      "skipped": false,
+      "duration_sec": 23.49
+    },
+    {
+      "table": "tab_solicitacao_alteracao",
+      "updated": 0,
+      "inserted": 389312,
+      "skipped": false,
+      "duration_sec": 7.42
+    },
+    {
+      "table": "tab_solicitacao_rendimento_aplicacao",
+      "updated": 0,
+      "inserted": 17889,
+      "skipped": false,
+      "duration_sec": 0.37
+    },
+    {
+      "table": "tab_obtv_convenente",
+      "updated": 0,
+      "inserted": 3034003,
+      "skipped": false,
+      "duration_sec": 56.46
+    }
+  ],
+  "errors": [
+    {
+      "table": "tab_convenios",
+      "error": "ERRO:  o valor nulo na coluna \"nr_convenio\" da relação \"stg_tab_convenios\" viola a restrição de não-nulo\nDETAIL:  Registro que falhou contém (null, 2189989, null, null, null, null, Proposta/Plano de Trabalho Aprovado, null, Publicado, SIM, SIM, 71000036724202687, 550008, null, 2026-06-15, 2027-08-15, 2027-08-15, 0, 2027-08-15, null, null, null, null, NÃO, null, NÃO, 1, null, null, 5643792.00, 5643792.00, 0.00, 3950654.40, null, null, null, null, null, null, null, 2026-07-11 09:26:10.503769).\nCONTEXT:  COPY stg_tab_convenios, linha 52: \";2189989;;;;;Proposta/Plano de Trabalho Aprovado;;Publicado;SIM;SIM;71000036724202687;550008;;2026-0...\"\n"
+    },
+    {
+      "table": "tab_contratos",
+      "error": "Nenhuma coluna compatível entre CSV e tab_contratos"
+    }
+  ],
+  "log_file": "D:\\claude\\claude_code\\carga_arquivos_transferegov\\logs\\carga_20260711_091506.log",
+  "summary_file": "D:\\claude\\claude_code\\carga_arquivos_transferegov\\logs\\resumo_20260711_091506.json",
+  "finished_at": "2026-07-11T10:15:53.633951"
+}

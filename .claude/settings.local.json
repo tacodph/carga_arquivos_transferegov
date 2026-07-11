@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:repositorio.dados.gov.br)",
+      "Bash(curl *)",
+      "Bash(python *)",
+      "Bash(pip install *)",
+      "Bash(psql -h localhost -p 5433 -U postgres -d transferepro *)",
+      "Bash(Get-ChildItem \"D:\\\\claude\\\\claude_code\\\\carga_arquivos_transferegov\" *)",
+      "Bash(Get-Content \"D:\\\\claude\\\\claude_code\\\\carga_arquivos_transferegov\\\\data\\\\lista_arquivo_tabela.xlsx\")",
+      "Read(D:\\\\projetos_herd\\\\transferepro\\\\database\\\\seeders\\\\transfere_pro_transferegov/**)",
+      "Read(D:\\\\projetos_herd\\\\transferepro\\\\database\\\\migrations\\\\transfere_pro_transferegov/**)",
+      "Read(D:\\\\projetos_herd\\\\transferepro\\\\docs/**)"
+    ]
+  }
+}

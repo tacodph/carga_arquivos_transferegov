@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-07-11T15:17:30.328542",
+  "tables": [
+    {
+      "table": "tab_fornecedores_licitacoes",
+      "updated": 0,
+      "inserted": 469844,
+      "skipped": false,
+      "duration_sec": 4.47
+    }
+  ],
+  "errors": [],
+  "log_file": "D:\\claude\\claude_code\\carga_arquivos_transferegov\\logs\\carga_20260711_151730.log",
+  "summary_file": "D:\\claude\\claude_code\\carga_arquivos_transferegov\\logs\\resumo_20260711_151730.json",
+  "finished_at": "2026-07-11T15:17:34.851214"
+}

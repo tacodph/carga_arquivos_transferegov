@@ -1,0 +1,5 @@
+2026-07-11 14:52:37,944 | INFO | controle_carga_dia id=4 dt_carga=2026-07-11 seq=3 extraidos=0
+2026-07-11 14:52:54,713 | INFO | COPY em 6 chunks (284059 linhas enviadas) para tab_convenios; staging=284059
+2026-07-11 14:52:58,413 | INFO | controle_carga id=128 endpoint=siconv/tab_convenios status=CORRIGIDO/SUCESSO ins=284059 upd=0 total=284059
+2026-07-11 14:52:58,413 | INFO | tab_convenios: {'updated': 0, 'inserted': 284059, 'skipped': False}
+2026-07-11 14:52:58,414 | INFO | controle_carga_dia id=4 finalizado status=CORRIGIDO/SUCESSO carregados=1 erros=0

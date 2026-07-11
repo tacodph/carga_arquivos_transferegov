@@ -1,0 +1,5 @@
+2026-07-11 15:17:41,268 | INFO | controle_carga_dia id=7 dt_carga=2026-07-11 seq=6 extraidos=0
+2026-07-11 15:17:57,190 | INFO | Staging tab_fornecedores_licitacoes: 469844 fornecedores distintos de tab_itens_licitacao
+2026-07-11 15:17:59,861 | INFO | controle_carga id=131 endpoint=siconv/tab_fornecedores_licitacoes status=SUCESSO ins=0 upd=469844 total=469844
+2026-07-11 15:17:59,862 | INFO | tab_fornecedores_licitacoes: {'updated': 469844, 'inserted': 0, 'skipped': False}
+2026-07-11 15:17:59,863 | INFO | controle_carga_dia id=7 finalizado status=SUCESSO carregados=1 erros=0
