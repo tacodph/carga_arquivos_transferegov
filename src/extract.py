@@ -1,4 +1,5 @@
 import logging
+import shutil
 import time
 import zipfile
 from pathlib import Path
@@ -9,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 _REPLACE_RETRIES = 8
 _REPLACE_RETRY_DELAY_S = 2.0
+_EXTRACT_CHUNK_SIZE = 16 * 1024 * 1024  # 16 MB
 
 
 def _replace_with_retries(temp_path: Path, dest_path: Path) -> None:
@@ -108,9 +110,13 @@ def extract_csvs(
                 extracted.append(dest_path)
                 continue
 
-            data = zf.read(member)
             temp_path = dest_path.with_suffix(dest_path.suffix + ".tmp")
-            temp_path.write_bytes(data)
+            try:
+                with zf.open(member, "r") as src, temp_path.open("wb") as dst:
+                    shutil.copyfileobj(src, dst, length=_EXTRACT_CHUNK_SIZE)
+            except Exception:
+                temp_path.unlink(missing_ok=True)
+                raise
             _replace_with_retries(temp_path, dest_path)
 
             extracted.append(dest_path)

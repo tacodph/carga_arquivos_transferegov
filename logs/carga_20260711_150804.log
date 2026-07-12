@@ -1,5 +1,0 @@
-2026-07-11 15:08:04,531 | INFO | controle_carga_dia id=5 dt_carga=2026-07-11 seq=4 extraidos=0
-2026-07-11 15:08:20,033 | INFO | COPY em 15 chunks (716670 linhas enviadas) para tab_contratos; staging=716670
-2026-07-11 15:08:23,447 | INFO | controle_carga id=129 endpoint=siconv/tab_contratos status=CORRIGIDO/SUCESSO ins=716670 upd=0 total=716670
-2026-07-11 15:08:23,447 | INFO | tab_contratos: {'updated': 0, 'inserted': 716670, 'skipped': False}
-2026-07-11 15:08:23,448 | INFO | controle_carga_dia id=5 finalizado status=SUCESSO carregados=1 erros=0
