@@ -275,6 +275,7 @@ def _copy_rows_to_staging(
                 f"FROM STDIN WITH (FORMAT csv, HEADER {header}, "
                 f"DELIMITER '{delimiter}', NULL '')"
             )
+            cur.execute("SET datestyle = 'ISO, DMY'")
             cur.copy_expert(copy_sql, buffer)
             chunks += 1
             rows_copied += row_count
