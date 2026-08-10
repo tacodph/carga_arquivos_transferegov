@@ -56,6 +56,14 @@ def get_csv_encoding() -> str:
     return os.getenv("CSV_ENCODING", "utf-8-sig")
 
 
+def get_download_base_url() -> str:
+    """Base URL dos ZIPs individuais (API pública TransfereGov)."""
+    return os.getenv(
+        "DOWNLOAD_BASE_URL",
+        "https://api-publica.transferegov.gestao.gov.br/downloads/dadosgov",
+    ).rstrip("/")
+
+
 def get_connection():
     cfg = get_db_config()
     return psycopg2.connect(

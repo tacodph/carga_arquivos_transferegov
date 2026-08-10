@@ -95,6 +95,22 @@ EMENDA_REQUIRED_COLUMNS = {
     ],
 }
 
+# Dedupe na staging pela chave natural — siconv_emenda.csv tem 1 linha por
+# beneficiário/proposta; tab_emendas precisa de 1 linha por nr_emenda.
+EMENDA_DEDUPE_COLUMNS = {
+    "tab_emendas": ["nr_emenda"],
+    "rlc_emendas_propostas_proponentes": [
+        "nr_emenda",
+        "id_proposta",
+        "identif_proponente",
+    ],
+    "tab_beneficiarios_emendas": [
+        "nr_emenda",
+        "id_proposta",
+        "beneficiario_emenda",
+    ],
+}
+
 CIPI_CSV_SOURCES = {
     "tab_contratos_cipi": {
         "tipo_aquisicao_contato": "tipo_aquisicao_contrato",
@@ -214,6 +230,10 @@ def get_emenda_columns(table_name: str) -> list[str]:
 
 def get_emenda_required_columns(table_name: str) -> list[str] | None:
     return EMENDA_REQUIRED_COLUMNS.get(table_name)
+
+
+def get_emenda_dedupe_columns(table_name: str) -> list[str] | None:
+    return EMENDA_DEDUPE_COLUMNS.get(table_name)
 
 
 def get_emenda_csv_sources(table_name: str) -> dict[str, str] | None:

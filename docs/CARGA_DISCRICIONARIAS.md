@@ -12,17 +12,22 @@ Consumir arquivos CSV do repositório público do governo federal, mapear cada a
 
 ## Fontes de dados
 
-Base URL: `https://repositorio.dados.gov.br/seges/detru/`
+Base URL: `https://api-publica.transferegov.gestao.gov.br/downloads/dadosgov`
 
-| ZIP | URL | Conteúdo |
-|-----|-----|----------|
-| `siconv.zip` | https://repositorio.dados.gov.br/seges/detru/siconv.zip | Maioria dos CSVs (~57 arquivos) |
-| `siconv_dados_obrasgov_geral.zip` | https://repositorio.dados.gov.br/seges/detru/siconv_dados_obrasgov_geral.zip | Dados CIPI obrasgov |
-| `siconv_contrato_cipi.csv.zip` | https://repositorio.dados.gov.br/seges/detru/siconv_contrato_cipi.csv.zip | Contratos CIPI |
-| `siconv_empenho_cipi.csv.zip` | https://repositorio.dados.gov.br/seges/detru/siconv_empenho_cipi.csv.zip | Empenhos CIPI |
-| `siconv_execucao_fisica_cipi.csv.zip` | https://repositorio.dados.gov.br/seges/detru/siconv_execucao_fisica_cipi.csv.zip | Execução física CIPI |
+Cada CSV do catálogo é publicado em um ZIP individual (`arquivo.csv` → `arquivo.zip`).
 
-Baixar cada ZIP uma única vez (deduplicar por `arquivo_zipado`). URLs completas estão na coluna `link` do catálogo.
+Exemplos:
+
+| ZIP | URL |
+|-----|-----|
+| `siconv_convenio.zip` | `.../dadosgov/siconv_convenio.zip` |
+| `siconv_contrato_cipi.zip` | `.../dadosgov/siconv_contrato_cipi.zip` |
+| `siconv_dados_obrasgov_geral.zip` | `.../dadosgov/siconv_dados_obrasgov_geral.zip` |
+| `apoiadores_emendas_programas.zip` | `.../dadosgov/apoiadores_emendas_programas.zip` |
+
+Baixar cada ZIP uma única vez (deduplicar por `arquivo_zipado`). URLs são montadas por `src/catalog.py` a partir de `DOWNLOAD_BASE_URL`.
+
+> Fonte antiga (`https://repositorio.dados.gov.br/seges/detru/siconv.zip`) não é mais usada.
 
 ## Catálogo de mapeamentos
 
@@ -62,6 +67,7 @@ DB_NAME=transferepro
 DB_USER=postgres
 DB_PASSWORD=<senha>
 DB_SCHEMA=transfere_pro_transferegov
+DOWNLOAD_BASE_URL=https://api-publica.transferegov.gestao.gov.br/downloads/dadosgov
 ```
 
 Ver `.env.example` na raiz do projeto.

@@ -2,30 +2,48 @@ from pathlib import Path
 
 import openpyxl
 
-from src.config import DATA_DIR
+from src.config import DATA_DIR, get_download_base_url
 
 CATALOG_PATH = DATA_DIR / "lista_arquivo_tabela.xlsx"
+
+
+def csv_to_zip_name(arquivo: str) -> str:
+    """Cada CSV público agora vem em um ZIP próprio (arquivo.csv → arquivo.zip)."""
+    name = arquivo.strip()
+    if name.lower().endswith(".csv"):
+        return f"{name[:-4]}.zip"
+    if name.lower().endswith(".zip"):
+        return name
+    return f"{name}.zip"
+
+
+def zip_download_url(zip_name: str, base_url: str | None = None) -> str:
+    base = (base_url or get_download_base_url()).rstrip("/")
+    return f"{base}/{zip_name}"
 
 
 def load_catalog(path: Path | None = None) -> list[dict]:
     xlsx_path = path or CATALOG_PATH
     wb = openpyxl.load_workbook(xlsx_path, read_only=True)
     ws = wb.active
+    base_url = get_download_base_url()
 
     entries = []
     for row in ws.iter_rows(min_row=2, values_only=True):
-        arquivo, tabela, grupo, zip_name, link = row
+        arquivo, tabela, grupo, _zip_name, _link = row
         if not arquivo:
             continue
 
+        arquivo_name = str(arquivo).strip()
+        zip_name = csv_to_zip_name(arquivo_name)
         tabelas = [t.strip() for t in str(tabela).split(",") if t.strip()]
         entries.append(
             {
-                "arquivo": str(arquivo).strip(),
+                "arquivo": arquivo_name,
                 "tabelas": tabelas,
                 "grupo": str(grupo).strip() if grupo else "",
-                "zip_name": str(zip_name).strip(),
-                "link": str(link).strip(),
+                "zip_name": zip_name,
+                "link": zip_download_url(zip_name, base_url),
             }
         )
 

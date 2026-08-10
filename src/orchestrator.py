@@ -45,7 +45,7 @@ from src.logging_config import (
     setup_logging,
 )
 from src.cipi_schema import prepare_cipi_table
-from src.emendas import update_emendas_resumo
+from src.emendas import dedupe_table_by_natural_key, update_emendas_resumo
 from src.fornecedores_licitacoes import (
     is_fornecedores_licitacoes_table,
     load_fornecedores_licitacoes_to_staging,
@@ -64,6 +64,7 @@ from src.splitters import (
     get_dl_required_columns,
     get_emenda_columns,
     get_emenda_csv_sources,
+    get_emenda_dedupe_columns,
     get_emenda_required_columns,
     get_programa_columns,
     is_cipi_table,
@@ -238,6 +239,7 @@ def process_table(
         required_columns = get_consorcio_required_columns(table)
     elif is_emenda_split_table(table):
         columns = get_emenda_columns(table)
+        dedupe_columns = get_emenda_dedupe_columns(table)
         required_columns = get_emenda_required_columns(table)
         csv_column_sources = get_emenda_csv_sources(table)
     elif is_cipi_table(table):
@@ -263,6 +265,8 @@ def process_table(
             required_columns=required_columns,
             csv_column_sources=csv_column_sources,
         )
+        if is_emenda_split_table(table) and not is_truncate_reload(table):
+            dedupe_table_by_natural_key(conn, table)
         if is_truncate_reload(table):
             logger.info("Carga completa (TRUNCATE + INSERT) para %s", table)
             result = truncate_reload_table(conn, table)

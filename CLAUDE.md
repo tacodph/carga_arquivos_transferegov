@@ -1,6 +1,6 @@
 # carga_arquivos_transferegov
 
-Pipeline de carga incremental dos dumps públicos SICONV/TransfereGov (transferências discricionárias) para PostgreSQL.
+Pipeline de carga dos dumps públicos SICONV/TransfereGov (transferências discricionárias) para PostgreSQL.
 
 ## Objetivo
 
@@ -37,6 +37,7 @@ DB_NAME=transferepro
 DB_USER=postgres
 DB_PASSWORD=<senha>
 DB_SCHEMA=transfere_pro_transferegov
+DOWNLOAD_BASE_URL=https://api-publica.transferegov.gestao.gov.br/downloads/dadosgov
 ```
 
 Template: `.env.example`
@@ -82,9 +83,11 @@ Ativar as skills em `.claude/skills/` ao trabalhar neste projeto:
 
 ## Fontes de dados públicas
 
-Base URL: `https://repositorio.dados.gov.br/seges/detru/`
+Base URL: `https://api-publica.transferegov.gestao.gov.br/downloads/dadosgov`
 
-5 ZIPs: `siconv.zip`, `siconv_dados_obrasgov_geral.zip`, `siconv_contrato_cipi.csv.zip`, `siconv_empenho_cipi.csv.zip`, `siconv_execucao_fisica_cipi.csv.zip`
+Cada CSV do catálogo tem um ZIP próprio (`arquivo.csv` → `arquivo.zip`). Não usar mais o monolito `siconv.zip` de `repositorio.dados.gov.br`.
+
+URLs são montadas em `src/catalog.py` a partir de `DOWNLOAD_BASE_URL` + `zip_name`.
 
 ## Estrutura do projeto
 

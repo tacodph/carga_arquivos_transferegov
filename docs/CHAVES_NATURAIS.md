@@ -26,7 +26,7 @@ Referência para MERGE incremental. Chaves derivadas das migrations do transfere
 | `tab_acomp_obras_contratos_medicoes_modulo_empresas` | `id_proposta, id_registro` | composta | revisar | Módulo empresas; confirmar chave no CSV |
 | `tab_acomp_obras_valores_itens_medicao_modulo_empresas` | `id_proposta, id_registro` | composta | revisar | Módulo empresas; confirmar chave no CSV |
 | `tab_apoiadores_emendas_programas` | `id_programa, nr_emenda` | composta | revisar | |
-| `tab_beneficiarios_emendas` | `nr_emenda, identif_proponente` | composta | definida | Split de siconv_emenda.csv |
+| `tab_beneficiarios_emendas` | `nr_emenda, id_proposta, beneficiario_emenda` | composta | definida | Split de siconv_emenda.csv; dedupe na staging pela chave |
 | `tab_consorcios` | `cnpj_consorcio` | simples | definida | Split de siconv_consorcios.csv |
 | `tab_contratos` | `cod_licitacao, num_contrato` | composta | definida | Sem PK formal; usar par licitação+contrato |
 | `tab_contratos_cipi` | `id_contrato_cipi` | simples | revisar | Tabela CIPI |
@@ -38,7 +38,7 @@ Referência para MERGE incremental. Chaves derivadas das migrations do transfere
 | `tab_desbloqueio_recurso_cr` | `id_desbloqueio` | simples | revisar | |
 | `tab_desembolsos` | `id_desembolso` | simples | definida | |
 | `tab_dl` | `id_dl` | simples | revisar | Confirmar no CSV |
-| `tab_emendas` | `nr_emenda` | simples | definida | Index idx_tabemendas_nr_emenda |
+| `tab_emendas` | `nr_emenda` | simples | definida | Index idx_tabemendas_nr_emenda; CSV tem N linhas/emenda — dedupe obrigatório na staging |
 | `tab_empenhos` | `id_empenho` | simples | definida | |
 | `tab_empenhos_cipi` | `id_empenho_cipi` | simples | revisar | Tabela CIPI |
 | `tab_etapas_crono_fisico` | `id_etapa` | simples | definida | Confirmar no CSV |

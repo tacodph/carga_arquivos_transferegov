@@ -1,8 +1,9 @@
 ---
 name: transferegov-carga-arquivos
 description: >-
-  Downloads SICONV/TransfereGov CSV dumps from repositorio.dados.gov.br, maps
-  files to PostgreSQL tables via lista_arquivo_tabela.xlsx, and ingests into
+  Downloads SICONV/TransfereGov CSV dumps from
+  api-publica.transferegov.gestao.gov.br/downloads/dadosgov, maps files to
+  PostgreSQL tables via lista_arquivo_tabela.xlsx, and ingests into
   transfere_pro_transferegov. Use when working on bulk file load, CSV ingestion,
   ZIP extraction, carga de arquivos, lista_arquivo_tabela, tab_ or rlc_ tables,
   or SICONV discricionarias data pipeline.
@@ -25,9 +26,9 @@ Fonte de verdade: `data/lista_arquivo_tabela.xlsx` (aba `transferepro`, 62 linha
 ### Exemplos de mapeamento
 
 ```
-siconv_convenio.csv          → tab_convenios                    (Tabelas Nucleo)         ← siconv.zip
-siconv_empenho_desembolso.csv → rlc_empenhos_desembolsos        (Fluxo Financeiro)       ← siconv.zip
-siconv_programa_proposta.csv  → rlc_programa_proposta           (Proponentes e Propostas) ← siconv.zip
+siconv_convenio.csv          → tab_convenios                    (Tabelas Nucleo)         ← siconv_convenio.zip
+siconv_empenho_desembolso.csv → rlc_empenhos_desembolsos        (Fluxo Financeiro)       ← siconv_empenho_desembolso.zip
+siconv_programa_proposta.csv  → rlc_programa_proposta           (Proponentes e Propostas) ← siconv_programa_proposta.zip
 siconv_dados_obrasgov_geral.csv → rlc_dados_obrasgov_geral     (Dados Cipi)             ← siconv_dados_obrasgov_geral.zip
 ```
 
@@ -44,17 +45,17 @@ Ao implementar, definir com o usuário como separar os dados de cada CSV nessas 
 
 ## ZIPs de download
 
-Deduplicar — são apenas 5 ZIPs para os 62 CSVs:
+Cada CSV do catálogo tem um ZIP individual na API pública:
 
-| ZIP | CSVs aprox. | URL base |
-|-----|-------------|----------|
-| `siconv.zip` | ~57 | `https://repositorio.dados.gov.br/seges/detru/siconv.zip` |
-| `siconv_dados_obrasgov_geral.zip` | 1 | `.../siconv_dados_obrasgov_geral.zip` |
-| `siconv_contrato_cipi.csv.zip` | 1 | `.../siconv_contrato_cipi.csv.zip` |
-| `siconv_empenho_cipi.csv.zip` | 1 | `.../siconv_empenho_cipi.csv.zip` |
-| `siconv_execucao_fisica_cipi.csv.zip` | 1 | `.../siconv_execucao_fisica_cipi.csv.zip` |
+Base URL: `https://api-publica.transferegov.gestao.gov.br/downloads/dadosgov`
 
-URLs completas estão na coluna `link` do XLSX — usar essa coluna, não reconstruir URLs.
+Regra: `siconv_convenio.csv` → `siconv_convenio.zip` →
+`https://api-publica.transferegov.gestao.gov.br/downloads/dadosgov/siconv_convenio.zip`
+
+`src/catalog.py` deriva `zip_name` e `link` a partir do nome do CSV e de `DOWNLOAD_BASE_URL`
+(não depende mais do monolito `siconv.zip` em `repositorio.dados.gov.br`).
+
+Arquivos fora do catálogo (ex.: `app_parceriasgov_necessidades.zip`) são ignorados.
 
 ## Workflow de carga
 

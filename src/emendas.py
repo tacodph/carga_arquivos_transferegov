@@ -1,4 +1,65 @@
-﻿from src.db_meta import qualified_table
+﻿import logging
+
+from src.db_meta import qualified_table
+from src.keys import get_key
+
+logger = logging.getLogger(__name__)
+
+
+def dedupe_table_by_natural_key(conn, table: str) -> int:
+    """Remove duplicados na destino, mantendo 1 linha por chave natural.
+
+    Preferência: registro com dte_carga/data_carga mais recente; empate por ctid.
+    """
+    key_columns = get_key(table)
+    if not key_columns:
+        return 0
+
+    dest = qualified_table(table)
+    partition = ", ".join(f'"{c}"' for c in key_columns)
+    order_parts = []
+    dest_cols = {c.lower() for c in _table_columns(conn, table)}
+    if "dte_carga" in dest_cols:
+        order_parts.append('"dte_carga" DESC NULLS LAST')
+    if "data_carga" in dest_cols:
+        order_parts.append('"data_carga" DESC NULLS LAST')
+    order_parts.append("ctid DESC")
+    order_sql = ", ".join(order_parts)
+
+    sql = f"""
+    DELETE FROM {dest} AS d
+    WHERE d.ctid IN (
+        SELECT ctid
+        FROM (
+            SELECT
+                ctid,
+                ROW_NUMBER() OVER (
+                    PARTITION BY {partition}
+                    ORDER BY {order_sql}
+                ) AS rn
+            FROM {dest}
+        ) ranked
+        WHERE ranked.rn > 1
+    )
+    """
+    with conn.cursor() as cur:
+        cur.execute(sql)
+        removed = cur.rowcount
+    conn.commit()
+    if removed:
+        logger.warning(
+            "Removidos %s duplicados de %s (chave %s)",
+            removed,
+            table,
+            ", ".join(key_columns),
+        )
+    return removed
+
+
+def _table_columns(conn, table: str) -> list[str]:
+    from src.db_meta import get_table_columns
+
+    return get_table_columns(conn, table)
 
 
 def update_emendas_resumo(conn) -> None:

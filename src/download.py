@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 _DOWNLOAD_CHUNK_SIZE = 16 * 1024 * 1024  # buffer de escrita em disco (não particiona o ZIP)
 _DOWNLOAD_RETRIES = 5
 _DOWNLOAD_RETRY_DELAY_S = 5.0
-_DOWNLOAD_TIMEOUT_S = 120
+_DOWNLOAD_TIMEOUT_S = 300
 _USER_AGENT = "transferegov-carga/1.0"
 
 
