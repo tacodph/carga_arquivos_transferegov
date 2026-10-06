@@ -79,13 +79,24 @@ from src.validate import check_data_carga, register_data_carga, validate_run
 logger = logging.getLogger("carga")
 
 _CONNECTION_ERRORS = (psycopg2.InterfaceError, psycopg2.OperationalError)
+_FINISH_ERROR_EXCEPTIONS = _CONNECTION_ERRORS + (ConnectionError, UnicodeDecodeError)
 
 
 def _finish_table_error_safe(conn, controle_id, table: str, error: str) -> None:
     try:
         finish_table_carga_error(conn, controle_id, table, error)
-    except _CONNECTION_ERRORS:
-        fresh = reconnect(conn)
+    except _FINISH_ERROR_EXCEPTIONS:
+        try:
+            fresh = reconnect(conn)
+        except Exception as reconnect_exc:
+            logger.error(
+                "Não foi possível registrar erro de %s no controle_carga "
+                "(reconexão falhou): %s | erro original: %s",
+                table,
+                reconnect_exc,
+                error,
+            )
+            return
         try:
             finish_table_carga_error(fresh, controle_id, table, error)
         finally:

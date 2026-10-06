@@ -65,12 +65,30 @@ def get_download_base_url() -> str:
 
 
 def get_connection():
+    """Abre conexão PostgreSQL.
+
+    No Windows (locale pt-BR), falhas do libpq podem vir em CP1252 e o psycopg2
+    estoura UnicodeDecodeError em vez da mensagem real. Normalizamos o encoding
+    do cliente e traduzimos esse caso para um erro legível.
+    """
     cfg = get_db_config()
-    return psycopg2.connect(
-        host=cfg.host,
-        port=cfg.port,
-        dbname=cfg.name,
-        user=cfg.user,
-        password=cfg.password,
-        options=f"-c search_path={cfg.schema},public",
-    )
+    os.environ.setdefault("PGCLIENTENCODING", "UTF8")
+    try:
+        return psycopg2.connect(
+            host=cfg.host,
+            port=cfg.port,
+            dbname=cfg.name,
+            user=cfg.user,
+            password=cfg.password,
+            connect_timeout=30,
+            options=(
+                f"-c search_path={cfg.schema},public "
+                f"-c client_encoding=UTF8"
+            ),
+        )
+    except UnicodeDecodeError as exc:
+        raise ConnectionError(
+            "Falha ao conectar ao PostgreSQL: o servidor pode estar fora do ar "
+            "ou sem espaço em disco (mensagem do SO em encoding incompatível). "
+            "Verifique o serviço PostgreSQL e o espaço livre no disco do data directory."
+        ) from exc
