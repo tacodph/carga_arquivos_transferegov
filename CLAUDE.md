@@ -50,6 +50,7 @@ Template: `.env.example`
 | `docs/CARGA_DISCRICIONARIAS.md` | Especificação completa do pipeline |
 | `docs/ESTRATEGIA_INCREMENTAL.md` | Regras de MERGE incremental |
 | `docs/CHAVES_NATURAIS.md` | Chaves naturais por tabela (65 tabelas) |
+| `docs/EMENDAS_PARLAMENTAR.md` | Emendas por ano + parlamentar normalizado (código do autor), carga com inativação |
 | `docs/Documentacao_Banco_TransfereGov.md` | Modelo fonte `bd_portal` (54 tabelas, FKs) |
 | `D:\projetos_herd\transferepro\database\seeders\transfere_pro_transferegov\seed-order.php` | Ordem de carga por FK |
 | `D:\projetos_herd\transferepro\database\migrations\transfere_pro_transferegov\` | DDL das tabelas destino |

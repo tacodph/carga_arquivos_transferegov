@@ -46,6 +46,7 @@ from src.logging_config import (
 )
 from src.cipi_schema import prepare_cipi_table
 from src.emendas import dedupe_table_by_natural_key, update_emendas_resumo
+from src.emendas_parlamentar import carga_emendas_parlamentar, tabelas_prontas
 from src.fornecedores_licitacoes import (
     is_fornecedores_licitacoes_table,
     load_fornecedores_licitacoes_to_staging,
@@ -152,7 +153,45 @@ def _run_tables_loop(
             errors += 1
             record_error(table, str(exc))
             logger.exception("Erro em %s: %s", table, exc)
+
+    if "tab_beneficiarios_emendas" in tables:
+        conn = ensure_connection(conn)
+        status = _run_emendas_parlamentar(conn, carga_dia_id)
+        if status == "ok":
+            processed += 1
+        elif status == "erro":
+            errors += 1
+        else:
+            skipped += 1
     return processed, errors, skipped, conn
+
+
+EMENDAS_PARLAMENTAR_STEP = "emendas_parlamentar"
+
+
+def _run_emendas_parlamentar(conn, carga_dia_id: int | None) -> str:
+    """Carga por ano + parlamentar normalizado (siconv_emenda + apoiadores)."""
+    step = EMENDAS_PARLAMENTAR_STEP
+    if not tabelas_prontas(conn):
+        return "pulado"
+    started = time.time()
+    controle_id = start_table_carga(conn, step, id_controle_carga_dia=carga_dia_id)
+    try:
+        detail = carga_emendas_parlamentar(conn)
+        result = {
+            "inserted": sum(r["inserted"] for r in detail.values()),
+            "updated": sum(r["updated"] for r in detail.values()),
+            "skipped": False,
+        }
+        finish_table_carga_success(conn, controle_id, step, result)
+        record_table_result(step, result, time.time() - started)
+        return "ok"
+    except Exception as exc:
+        safe_rollback(conn)
+        _finish_table_error_safe(conn, controle_id, step, str(exc))
+        record_error(step, str(exc))
+        logger.exception("Erro em %s: %s", step, exc)
+        return "erro"
 
 
 def _skip_table(
@@ -628,6 +667,17 @@ def cmd_status(_: argparse.Namespace) -> None:
         conn.close()
 
 
+def cmd_emendas_parlamentar(_: argparse.Namespace) -> None:
+    conn = get_connection()
+    try:
+        if not tabelas_prontas(conn):
+            raise SystemExit(1)
+        detail = carga_emendas_parlamentar(conn)
+        print(json.dumps(detail, ensure_ascii=False, indent=2, default=str))
+    finally:
+        conn.close()
+
+
 def cmd_validate(_: argparse.Namespace) -> None:
     catalog = load_catalog()
     index = build_catalog_index(catalog)
@@ -688,6 +738,10 @@ def main() -> None:
     p_resume.set_defaults(func=cmd_resume)
     sub.add_parser("status", help="Última carga").set_defaults(func=cmd_status)
     sub.add_parser("validate", help="Validar carga").set_defaults(func=cmd_validate)
+    sub.add_parser(
+        "emendas-parlamentar",
+        help="Carga das emendas por ano com parlamentar normalizado (usa CSVs já extraídos)",
+    ).set_defaults(func=cmd_emendas_parlamentar)
 
     args = parser.parse_args()
     if args.command == "list-tables":
